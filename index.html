@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autofill Form</title>
+    <script>
+        // Function to wait for the form fields to exist
+        function waitForFields() {
+            // Check if the fields exist
+            const firstNameField = document.getElementById("RepFirstName");
+            const lastNameField = document.getElementById("RepLastName");
+            const repNumberField = document.getElementById("RepNumber");
+            const phoneNumberField = document.getElementById("RepPhoneNumber");
+            const emailAddressField = document.getElementById("RepEmailAddress");
+
+            // If all fields are found, autofill them
+            if (firstNameField && lastNameField && repNumberField && phoneNumberField && emailAddressField) {
+                firstNameField.value = "Rodolfo"; // First Name
+                lastNameField.value = "Hurtado"; // Last Name
+                repNumberField.value = "JKF3F"; // Rep ID
+                phoneNumberField.value = "3467548594"; // Phone Number
+                emailAddressField.value = "rodolfogpi22@gmail.com"; // Email
+
+                // Optionally, trigger change events if necessary
+                phoneNumberField.dispatchEvent(new Event('change'));
+                emailAddressField.dispatchEvent(new Event('change'));
+            } else {
+                // If fields are not found, wait and check again
+                setTimeout(waitForFields, 100); // Check every 100ms
+            }
+        }
+
+        // Function to redirect to the form and start waiting for fields
+        function redirectAndAutofill() {
+            // Redirect to the form after a short delay
+            setTimeout(function() {
+                window.location.href = "https://www.refersecure.com/?comingfrom=partners";
+
+                // Start waiting for the fields to become available
+                setTimeout(waitForFields, 3000); // Check for fields after redirect
+            }, 3000); // Initial delay before redirect
+        }
+
+        // Start the redirection and autofill process
+        window.onload = redirectAndAutofill;
+    </script>
+</head>
+<body>
+    <h1>Redirecting...</h1>
+    <p>Please wait while we autofill my information onto the form. If autofill does not work, try again later, or contact me!</p>
+</body>
+</html>
